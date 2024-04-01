@@ -44,7 +44,7 @@ class _BlogItemDetailsState extends State<BlogItemDetails> {
               const SizedBox(height: 16.0),
               Text('Date: ${widget.blogItem.date.toLocal()}'),
               const SizedBox(height: 16.0),
-              Text('Body: ${widget.blogItem.bodyText}'),
+              Text('Description: ${widget.blogItem.bodyText}'),
               const SizedBox(height: 16.0),
               if (widget.blogItem.imagePath != null) Image.file(File(widget.blogItem.imagePath!)),
             ],
@@ -71,8 +71,8 @@ class _BlogItemDetailsState extends State<BlogItemDetails> {
 
   void _shareBlogItem(BuildContext context) {
     Share.share(
-      'Check out this blog item:\n\nTitle: ${widget.blogItem.title}\nDate: ${widget.blogItem.date.toIso8601String()}\nBody: ${widget.blogItem.bodyText}',
-      subject: 'Blog Item: ${widget.blogItem.title}',
+      'Check out this blog post:\n\nTitle: ${widget.blogItem.title}\nDate: ${widget.blogItem.date.toIso8601String()}\nBody: ${widget.blogItem.bodyText}',
+      subject: 'Blog Post: ${widget.blogItem.title}',
     );
   }
 }
