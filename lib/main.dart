@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // Changed the initial route to SplashScreen
-      home: SplashScreen(), // Add the SplashScreen here
+      home: const SplashScreen(),
       routes: {
         // When navigating to the "/" route, build the HomeScreen widget.
         '/home': (context) => const HomeScreen(),
