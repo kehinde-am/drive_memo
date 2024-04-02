@@ -101,17 +101,17 @@ class HomeScreenState extends State<HomeScreen> {
               blogItemsFuture = fetchBlogItems();
             });
           },
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: "Search...",
             border: InputBorder.none,
           ),
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.black),
         )
-            : Text('Blog Home'),
+            : const Text('Blog Home'),
         actions: [
           if (!_isSelectionModeEnabled)
             IconButton(
-              icon: Icon(Icons.search),
+              icon: const Icon(Icons.search),
               onPressed: () {
                 setState(() {
                   _isSearching = !_isSearching;
@@ -120,7 +120,7 @@ class HomeScreenState extends State<HomeScreen> {
             ),
           if (_isSearching)
             IconButton(
-              icon: Icon(Icons.clear),
+              icon: const Icon(Icons.clear),
               onPressed: () {
                 setState(() {
                   _isSearching = false;
@@ -131,17 +131,17 @@ class HomeScreenState extends State<HomeScreen> {
             ),
           if (_isSelectionModeEnabled || _selectedItems.isNotEmpty)
             IconButton(
-              icon: Icon(Icons.delete),
+              icon: const Icon(Icons.delete),
               onPressed: _deleteSelectedItems,
             ),
           if (_isSelectionModeEnabled)
             IconButton(
-              icon: Icon(Icons.cancel),
+              icon: const Icon(Icons.cancel),
               onPressed: toggleSelectionMode,
             ),
           if (!_isSelectionModeEnabled && _selectedItems.isEmpty)
             IconButton(
-              icon: Icon(Icons.select_all),
+              icon: const Icon(Icons.select_all),
               onPressed: toggleSelectionMode,
             ),
         ],
@@ -189,6 +189,23 @@ class HomeScreenState extends State<HomeScreen> {
       margin: const EdgeInsets.all(8.0),
       color: isSelected ? Colors.blue[100] : null,
       child: ListTile(
+        leading: _isSelectionModeEnabled
+            ? Checkbox(
+          value: isSelected,
+          onChanged: (bool? value) {
+            toggleItemSelection(item.id);
+          },
+        )
+            : (item.imagePath != null && item.imagePath!.isNotEmpty)
+            ? Image.file(
+          File(item.imagePath!),
+          width: 50, // Small image width
+          height: 50, // Small image height
+          fit: BoxFit.cover,
+        )
+            : null, // Show some default icon if no image exists
+        title: Text(item.title),
+        subtitle: Text(formattedDate),
         onTap: () {
           if (_isSelectionModeEnabled) {
             toggleItemSelection(item.id);
@@ -198,17 +215,7 @@ class HomeScreenState extends State<HomeScreen> {
             ));
           }
         },
-        title: Text(item.title),
-        subtitle: Text(formattedDate),
-        leading: _isSelectionModeEnabled
-            ? Checkbox(
-          value: isSelected,
-          onChanged: (bool? value) {
-            toggleItemSelection(item.id);
-          },
-        )
-            : null,
-        trailing: !_isSelectionModeEnabled
+        trailing: _isSelectionModeEnabled || !isSelected
             ? IconButton(
           icon: Icon(Icons.delete_outline, color: Colors.red),
           onPressed: () {

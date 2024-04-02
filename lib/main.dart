@@ -3,7 +3,7 @@ import 'package:drive_memo/screens/home_screen.dart';
 import 'package:drive_memo/screens/edit_blog_item_screen.dart';
 import 'package:drive_memo/screens/create_blog_item_screen.dart';
 import 'package:drive_memo/screens/blog_item_list.dart';
-import 'package:drive_memo/screens/splash_screen.dart'; // Import the SplashScreen
+import 'package:drive_memo/screens/splash_screen.dart';
 import 'models/blog_item.dart';
 
 void main() {
