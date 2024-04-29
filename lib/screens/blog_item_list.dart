@@ -3,7 +3,7 @@ import 'package:drive_memo/models/blog_item.dart';
 import 'package:drive_memo/database/database_helper.dart';
 
 class BlogItemList extends StatelessWidget {
-  const BlogItemList({Key? key});
+  const BlogItemList({super.key});
 
   @override
   Widget build(BuildContext context) {

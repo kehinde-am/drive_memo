@@ -7,7 +7,7 @@ import 'dart:io';
 import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   HomeScreenState createState() => HomeScreenState();
@@ -64,15 +64,15 @@ class HomeScreenState extends State<HomeScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Delete Selected Items"),
-          content: Text("Are you sure you want to delete these items?"),
+          title: const Text("Delete Selected Items"),
+          content: const Text("Are you sure you want to delete these items?"),
           actions: <Widget>[
             TextButton(
-              child: Text("Cancel"),
+              child: const Text("Cancel"),
               onPressed: () => Navigator.of(context).pop(),
             ),
             TextButton(
-              child: Text("Delete", style: TextStyle(color: Colors.red)),
+              child: const Text("Delete", style: TextStyle(color: Colors.red)),
               onPressed: () async {
                 Navigator.of(context).pop();
                 for (var itemId in _selectedItems) {
@@ -169,14 +169,14 @@ class HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           final result = await Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => CreateBlogItemScreen()),
+            MaterialPageRoute(builder: (context) => const CreateBlogItemScreen()),
           );
           if (result == true) {
             _refreshBlogItems();
           }
         },
         tooltip: 'Create Blog Item',
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -217,22 +217,22 @@ class HomeScreenState extends State<HomeScreen> {
         },
         trailing: _isSelectionModeEnabled || !isSelected
             ? IconButton(
-          icon: Icon(Icons.delete_outline, color: Colors.red),
+          icon: const Icon(Icons.delete_outline, color: Colors.red),
           onPressed: () {
             // This can also be extracted to a method if the deletion logic gets more complex
             showDialog(
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text("Delete Blog Item"),
-                  content: Text("Are you sure you want to delete this item?"),
+                  title: const Text("Delete Blog Item"),
+                  content: const Text("Are you sure you want to delete this item?"),
                   actions: <Widget>[
                     TextButton(
-                      child: Text("Cancel"),
+                      child: const Text("Cancel"),
                       onPressed: () => Navigator.of(context).pop(),
                     ),
                     TextButton(
-                      child: Text("Delete", style: TextStyle(color: Colors.red)),
+                      child: const Text("Delete", style: TextStyle(color: Colors.red)),
                       onPressed: () async {
                         Navigator.of(context).pop(); // Dismiss the dialog
                         await DatabaseHelper.instance.deleteBlogItem(item.id!); // Proceed with deletion

@@ -1,6 +1,7 @@
 # drive_memo
 
 A blog app about cars
+Run pub get to install all dependencies for the project
 
 ## Getting Started
 

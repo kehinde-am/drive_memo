@@ -68,7 +68,7 @@ class _CreateBlogItemScreenState extends State<CreateBlogItemScreen> {
                   decoration: const InputDecoration(labelText: 'Date'),
                   onTap: () {
                     // Prevent the default keyboard from appearing
-                    FocusScope.of(context).requestFocus(new FocusNode());
+                    FocusScope.of(context).requestFocus(FocusNode());
                     // Show Date Picker here
                     _selectDate(context);
                   },

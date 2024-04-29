@@ -7,7 +7,7 @@ import 'package:drive_memo/database/database_helper.dart';
 class EditBlogItemScreen extends StatefulWidget {
   final BlogItem blogItem;
 
-  const EditBlogItemScreen(this.blogItem, {Key? key}) : super(key: key);
+  const EditBlogItemScreen(this.blogItem, {super.key});
 
   @override
   _EditBlogItemScreenState createState() => _EditBlogItemScreenState();
