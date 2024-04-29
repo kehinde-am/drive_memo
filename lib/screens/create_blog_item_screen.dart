@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:drive_memo/database/database_helper.dart';
@@ -116,7 +115,7 @@ class _CreateBlogItemScreenState extends State<CreateBlogItemScreen> {
                       imagePath: _image?.path,
                     );
 
-                    print('New Blog Item: $newBlogItem');
+                    // print('New Blog Item: $newBlogItem');
 
                     try {
                       final Database db = await DatabaseHelper.instance.database;

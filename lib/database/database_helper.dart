@@ -9,28 +9,17 @@ class DatabaseHelper {
 
   DatabaseHelper._privateConstructor();
 
-  // This method ensures that the database is initialized only once and reused.
   Future<Database> get database async {
-    if (_database != null) return _database!;
+    if (_database != null && _database!.isOpen) return _database!;
     _database = await _initDatabase();
     return _database!;
   }
 
-  // Initialize the database at the correct path.
   Future<Database> _initDatabase() async {
-    // Use getDatabasesPath() to find the default database directory and join it with your database name.
     final path = join(await getDatabasesPath(), 'drive_memo.db');
-    // Print the path to the console for debugging purposes.
-
-    return await openDatabase(
-      path,
-      version: 1,
-      onCreate: _createDatabase,
-    );
+    return await openDatabase(path, version: 1, onCreate: _createDatabase);
   }
 
-
-  // Create the database schema.
   Future<void> _createDatabase(Database db, int version) async {
     await db.execute('''
       CREATE TABLE blog_items(
@@ -43,34 +32,28 @@ class DatabaseHelper {
     ''');
   }
 
-  // Insert a blog item into the database.
   Future<void> insertBlogItem(BlogItem blogItem) async {
     final Database db = await database;
-    try {
-      await db.insert(
-        'blog_items',
-        blogItem.toMap(),
-        conflictAlgorithm: ConflictAlgorithm.replace,
-      );
-    } catch (e) {
-      debugPrint("Error inserting blog item: $e");
-      rethrow;
-    }
+    await db.transaction((txn) async {
+      try {
+        await txn.insert(
+          'blog_items',
+          blogItem.toMap(),
+          conflictAlgorithm: ConflictAlgorithm.replace,
+        );
+      } catch (e) {
+        debugPrint("Error inserting blog item: $e");
+        rethrow;
+      }
+    });
   }
 
-  // Retrieve all blog items from the database.
   Future<List<BlogItem>> getBlogItems() async {
     final Database db = await database;
-    try {
-      final List<Map<String, dynamic>> result = await db.query('blog_items');
-      return result.map((map) => BlogItem.fromMap(map)).toList();
-    } catch (e) {
-      debugPrint("Error fetching blog items: $e");
-      rethrow;
-    }
+    final List<Map<String, dynamic>> result = await db.query('blog_items');
+    return result.map((map) => BlogItem.fromMap(map)).toList();
   }
 
-  // Update a blog item in the database.
   Future<void> updateBlogItem(BlogItem blogItem) async {
     final db = await database;
     await db.update(
@@ -81,16 +64,19 @@ class DatabaseHelper {
     );
   }
 
-  // Delete a blog item from the database.
   Future<void> deleteBlogItem(int id) async {
     final db = await database;
-    await db.delete(
-      'blog_items',
-      where: 'id = ?',
-      whereArgs: [id],
-    );
+    await db.delete('blog_items', where: 'id = ?', whereArgs: [id]);
   }
 
+  Future<void> clearDatabase() async {
+    final path = join(await getDatabasesPath(), 'drive_memo.db');
+    await deleteDatabase(path);
+  }
 
-
+  Future<void> closeDatabase() async {
+    if (_database != null && _database!.isOpen) {
+      await _database!.close();
+    }
+  }
 }
