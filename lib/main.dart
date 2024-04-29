@@ -3,7 +3,7 @@ import 'package:drive_memo/screens/home_screen.dart';
 import 'package:drive_memo/screens/edit_blog_item_screen.dart';
 import 'package:drive_memo/screens/create_blog_item_screen.dart';
 import 'package:drive_memo/screens/blog_item_list.dart';
-import 'package:drive_memo/screens/splash_screen.dart'; // Import the SplashScreen
+import 'package:drive_memo/screens/splash_screen.dart';
 import 'models/blog_item.dart';
 
 void main() {
@@ -12,7 +12,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // Changed the initial route to SplashScreen
-      home: SplashScreen(), // Add the SplashScreen here
+      home: const SplashScreen(),
       routes: {
         // When navigating to the "/" route, build the HomeScreen widget.
         '/home': (context) => const HomeScreen(),

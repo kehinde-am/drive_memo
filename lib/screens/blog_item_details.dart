@@ -4,11 +4,11 @@ import 'package:drive_memo/screens/edit_blog_item_screen.dart';
 import 'package:share_plus/share_plus.dart';
 import 'dart:io';
 
-// Convert to StatefulWidget
+
 class BlogItemDetails extends StatefulWidget {
   final BlogItem blogItem;
 
-  const BlogItemDetails({Key? key, required this.blogItem}) : super(key: key);
+  const BlogItemDetails({super.key, required this.blogItem});
 
   @override
   _BlogItemDetailsState createState() => _BlogItemDetailsState();
@@ -44,7 +44,7 @@ class _BlogItemDetailsState extends State<BlogItemDetails> {
               const SizedBox(height: 16.0),
               Text('Date: ${widget.blogItem.date.toLocal()}'),
               const SizedBox(height: 16.0),
-              Text('Body: ${widget.blogItem.bodyText}'),
+              Text('Description: ${widget.blogItem.bodyText}'),
               const SizedBox(height: 16.0),
               if (widget.blogItem.imagePath != null) Image.file(File(widget.blogItem.imagePath!)),
             ],
@@ -60,19 +60,17 @@ class _BlogItemDetailsState extends State<BlogItemDetails> {
       MaterialPageRoute(builder: (context) => EditBlogItemScreen(widget.blogItem)),
     );
 
-    // If EditBlogItemScreen indicates that an update was made, you can use setState to update the UI here
+    // If EditBlogItemScreen indicates that an update was made, use setState to update the UI here
     if (result == true) {
       setState(() {
-        // This is just a placeholder action.
-        // The actual update logic will depend on how you manage state.
       });
     }
   }
 
   void _shareBlogItem(BuildContext context) {
     Share.share(
-      'Check out this blog item:\n\nTitle: ${widget.blogItem.title}\nDate: ${widget.blogItem.date.toIso8601String()}\nBody: ${widget.blogItem.bodyText}',
-      subject: 'Blog Item: ${widget.blogItem.title}',
+      'Check out this blog post:\n\nTitle: ${widget.blogItem.title}\nDate: ${widget.blogItem.date.toIso8601String()}\nBody: ${widget.blogItem.bodyText}',
+      subject: 'Blog Post: ${widget.blogItem.title}',
     );
   }
 }

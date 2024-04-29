@@ -49,7 +49,7 @@ class _CreateBlogItemScreenState extends State<CreateBlogItemScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create Blog Item'),
+        title: const Text('Create Blog Post'),
       ),
       body: SafeArea( // Ensure the content is within the safe area
         child: SingleChildScrollView( // Makes the view scrollable
@@ -68,7 +68,7 @@ class _CreateBlogItemScreenState extends State<CreateBlogItemScreen> {
                   decoration: const InputDecoration(labelText: 'Date'),
                   onTap: () {
                     // Prevent the default keyboard from appearing
-                    FocusScope.of(context).requestFocus(new FocusNode());
+                    FocusScope.of(context).requestFocus(FocusNode());
                     // Show Date Picker here
                     _selectDate(context);
                   },
@@ -95,7 +95,7 @@ class _CreateBlogItemScreenState extends State<CreateBlogItemScreen> {
                 TextField(
                   controller: _bodyTextController,
                   maxLines: null,
-                  decoration: const InputDecoration(labelText: 'Body Text'),
+                  decoration: const InputDecoration(labelText: 'Description'),
                 ),
                 const SizedBox(height: 16.0),
                 ElevatedButton(
