@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:drive_memo/models/blog_item.dart';
 import 'package:drive_memo/screens/edit_blog_item_screen.dart';
+import 'package:intl/intl.dart';
 import 'package:share_plus/share_plus.dart';
 import 'dart:io';
 
@@ -20,6 +21,8 @@ class _BlogItemDetailsState extends State<BlogItemDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final String formattedDate = DateFormat('yyyy-MM-dd').format(widget.blogItem.date);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.blogItem.title), // Use widget.blogItem to access the BlogItem object
@@ -42,7 +45,7 @@ class _BlogItemDetailsState extends State<BlogItemDetails> {
             children: [
               Text('Title: ${widget.blogItem.title}', style: Theme.of(context).textTheme.titleLarge),
               const SizedBox(height: 16.0),
-              Text('Date: ${widget.blogItem.date.toLocal()}'),
+              Text('Date: $formattedDate'),
               const SizedBox(height: 16.0),
               Text('Description: ${widget.blogItem.bodyText}'),
               const SizedBox(height: 16.0),
